@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SimpleJPQLTests {
 
     /*
-    * JPQL(Java Persistence Query Language)
-    * 엔티티 객체를 중심으로 개발 할 수 있는 객체지향쿼리
-    * SQL보다 간결하고, 특정 DBMS에 의존하지 않는다.
-    * 방언을 통해 해당 DBMS에 맞는 SQL을 실행하게된다.
-    * JPQL은 find() 메소드를 통한 조회와 다르게 항상 데이터베이스에서 SQL을 실행해서 결과를 조회
-    * */
+     * JPQL(Java Persistence Query Language)
+     * 엔티티 객체를 중심으로 개발 할 수 있는 객체지향쿼리
+     * SQL보다 간결하고, 특정 DBMS에 의존하지 않는다.
+     * 방언을 통해 해당 DBMS에 맞는 SQL을 실행하게된다.
+     * JPQL은 find() 메소드를 통한 조회와 다르게 항상 데이터베이스에서 SQL을 실행해서 결과를 조회
+     * */
 
     private static EntityManagerFactory entityManagerFactory;
     private static EntityManager entityManager;
@@ -128,5 +128,77 @@ public class SimpleJPQLTests {
         }
 
 
+    }
+
+    @Test
+    @DisplayName("Query를 이용한 다중행 조회 테스트")
+    public void test5() {
+
+        //given
+        //when
+        String jpql = "select m from menu_section01 m";
+
+        Query query = entityManager.createQuery(jpql); // 반환 타입을 매핑한 엔티티타입으로 설정
+
+        List<Menu> menuList = query.getResultList(); // 결과 반환
+
+        //then
+        assertNotNull(menuList);
+
+//        menuList.forEach(System.out::println);
+        for (Menu menu : menuList) {
+            System.out.println(menu);
+        }
+
+    }
+
+    @Test
+    @DisplayName("distinct를 사용한 중복제거 여러 행 조회 테스트")
+    void test6() {
+
+        //given
+        //when
+        String jpql = "select distinct m.categoryCode from menu_section01 m";
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+
+        List<Integer> categoryList = query.getResultList();
+
+        //then
+        assertNotNull(categoryList);
+
+//        categoryList.forEach(System.out::println);
+        for (Integer integer : categoryList) {
+            System.out.println(integer);
+        }
+    }
+
+    @Test
+    @DisplayName("in 연산자를 활용한 조회 테스트")
+    void test7() {
+
+        //given
+        //when
+        String jpql = "select m from menu_section01 m where m.categoryCode in(6,7)"
+                + "order by m.menuCode desc";
+
+        List<Menu> menuList = entityManager.createQuery(jpql, Menu.class).getResultList();
+
+        //then
+        assertNotNull(menuList);
+        menuList.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("like 연산자를 활요한 조회 테스트")
+    void test8() {
+
+        //given
+        //when
+        String jpql = "select m from menu_section01 m where m.menuName like '%마늘%'";
+        List<Menu> menuList = entityManager.createQuery(jpql, Menu.class).getResultList();
+
+        //then
+        assertNotNull(menuList);
+        menuList.forEach(System.out::println);
     }
 }
