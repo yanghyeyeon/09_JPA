@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import org.hibernate.type.descriptor.java.JdbcTimeJavaType;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
