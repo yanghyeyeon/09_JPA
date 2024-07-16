@@ -9,7 +9,7 @@ import lombok.*;
 * 클래스에도 적용을 시키고, 필드에도 적용을 시키며느 필드에 적용시킨 내용이 우선적으로 적용
 * */
 
-@Entity(name = "member_section05_sub01")
+//@Entity(name = "member_section05_sub01")
 @Table(name = "tbl_member_section05_sub01")
 @NoArgsConstructor
 @AllArgsConstructor
