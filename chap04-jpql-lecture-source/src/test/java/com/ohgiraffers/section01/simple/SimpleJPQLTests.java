@@ -159,6 +159,9 @@ public class SimpleJPQLTests {
         //given
         //when
         String jpql = "select distinct m.categoryCode from menu_section01 m";
+
+        // entity 하나를 다룰때는 별칭을 쓰지 않아도 괜찮음
+
         TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
 
         List<Integer> categoryList = query.getResultList();
