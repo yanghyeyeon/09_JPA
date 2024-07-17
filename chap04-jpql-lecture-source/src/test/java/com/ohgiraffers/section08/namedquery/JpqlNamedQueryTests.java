@@ -88,6 +88,7 @@ public class JpqlNamedQueryTests {
                         .createNamedQuery(
                                 "section08.namedquery.Menu.findByMenuNameLike",
                                 Menu.class)
+
                         .setParameter("menuName",menuName)
                         .getResultList();
         //then
