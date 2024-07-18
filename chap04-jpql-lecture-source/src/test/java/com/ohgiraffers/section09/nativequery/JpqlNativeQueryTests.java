@@ -112,7 +112,7 @@ public class JpqlNativeQueryTests {
     }
 
     @Test
-    @DisplayName("@NamedAntiveQuery 사용하기 - 엔티티")
+    @DisplayName("@NamedNativeQuery 사용하기 - 엔티티")
     void test3() {
 
         //given
