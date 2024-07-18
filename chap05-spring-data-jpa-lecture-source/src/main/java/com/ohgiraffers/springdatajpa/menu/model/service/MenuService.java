@@ -87,8 +87,8 @@ public class MenuService {
                 .collect(Collectors.toList());
     }
 
-    public List<CategoryDto> findAllCategory() {
-
-        List<Category> categoryList = categoryRepository
-    }
+//    public List<CategoryDto> findAllCategory() {
+//
+//        List<Category> categoryList = categoryRepository
+//    }
 }
